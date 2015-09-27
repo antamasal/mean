@@ -1,0 +1,40 @@
+<h2>Tareas</h2>
+<div class="row" ng-controller="taskController">
+	<div class="col-sm-12 col-sm-offset-1">
+		<table class="table table-striped">
+			<tr class="info">
+				<td>Nombre</td>
+				<td>Descripcion</td>
+				<td>id_user</td>
+			</tr>
+			<tr ng-repeat="task in tasks" ng-click="selectTask(task)">
+				<td>{{ task.name }}</td>
+				<td>{{ task.description }}</td>
+				<td>{{ task.idUser }}</td>						
+			</tr>
+		</table>	
+	<button  ng-click="showMe()">Añadir usuario </button>
+	<br><br>
+      <div class="col-sm-4 col-sm-offset-1 text-center" ng-show="show">
+			<form name="myForm" enctype="multipart/form-data">
+				<div class="form-group">
+					<input type="text" class="form-control input-lg text-center" placeholder="Nombre" ng-model="newTask.name" required>
+					<br>
+					<input type="text" class="form-control input-lg text-center" placeholder="Descripcion" ng-model="newTask.description" required>
+					<br>
+					<input type="date" class="form-control input-lg text-center" placeholder="Email" ng-model="newTask.date" required>
+					<br>
+					<select name="selectUser" id="selectUser"
+				    ng-options="user.name for user in users track by user._id"
+				    ng-model="newTask.idUser"></select>
+
+				</div>
+
+				<!-- Acciones que podemos realizar en el formulario -->
+				<button type="submit" class="btn btn-success btn-lg" ng-click="registrarTask()">Registrar</button>
+				<button type="submit" class="btn btn-success btn-lg" ng-click="updateUser(newUser)" ng-show="myForm.$valid && action=='update'">RegistraVVVVVVV</button>
+				<button type="submit" class="btn btn-danger btn-lg" ng-click="removeUser(newUser)" ng-show="action=='update'">Borrar</button>
+
+			</form>
+		</div>
+</div>

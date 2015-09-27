@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<!-- ASSIGN OUR ANGULAR MODULE -->
+<html ng-app="MainApp">
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<title>Ejemplo MEAN</title>
+	<!-- Cargamos bootstrap -->
+	<!-- Cargamos angular -->
+	<script src="//ajax.googleapis.com/ajax/libs/angularjs/1.2.16/angular.min.js"></script>
+
+	<!-- Latest compiled and minified CSS -->
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
+
+	<!-- Optional theme -->
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap-theme.min.css">
+
+	<!-- Latest compiled and minified JavaScript -->
+	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
+
+	<!-- Cargamos el javascript de angular -->
+	<script src="coreUser.js"></script>
+	<script src="coreTask.js"></script>
+
+	<script src="../node_modules/angular-route/angular-route.js"></script>
+	<script src="core.js"></script>
+</head>
+<body>
+	<div class="container">
+		<div ng-controller="routerController">
+	      <div ng-include="'/user.html'"  ng-show="userVisible"></div>
+	      <div ng-include="'/task.html'" ng-show="taskVisible"></div>
+	  </div>
+	</div>
+</body>
+</html>

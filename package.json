@@ -1,0 +1,15 @@
+{
+  "name": "UserTask",
+  "version": "0.0.1",
+  "description": "Aplicacion que relaciona tareas con usuarios",
+  "main": "server.js",
+  "author": "Antonio Juan Amador",
+  "dependencies": {
+    "angular-route": "~1.4.0",
+    "bootstrap": "^3.3.5",
+    "express": "~3.4.4",
+    "mongoose": "~3.6.2",
+    "jquery": ">= 2.1.4"
+
+  }
+}

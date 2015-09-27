@@ -1,0 +1,44 @@
+<h2>Usuarios</h2>
+<div class="row" ng-controller="userController">
+	<div class="col-sm-12 col-sm-offset-1">
+		<table class="table table-striped">
+			<tr class="info">
+				<td>Nombre</td>
+				<td>Edad</td>
+				<td>Registro</td>
+			</tr>
+			<tr ng-repeat="user in users" ng-click="selectUser(user)">
+				<td>{{ user.name }}</td>
+				<td>{{ user.age }}</td>
+				<td>{{ user.date }}</td>						
+			</tr>
+		</table>					
+	
+	<button  ng-click="showMe()">Añadir usuario </button>
+
+	<br><br>
+      <div class="col-sm-4 col-sm-offset-1 text-center" ng-show="show">
+			<form name="myForm" enctype="multipart/form-data">
+				<div class="form-group">
+					<input type="text" class="form-control input-lg text-center" placeholder="Nombre" ng-model="newUser.name" required>
+					<br>
+					<input type="number" class="form-control input-lg text-center" placeholder="Edad" ng-model="newUser.age" required>
+					<br>
+					<input type="textarea" class="form-control input-lg text-center" placeholder="Biografía" ng-model="newUser.bio" required>
+					<br>
+					<input type="text" class="form-control input-lg text-center" placeholder="Email" ng-model="newUser.email" required>
+					<br>
+					<input type="text" class="form-control input-lg text-center" placeholder="Password" ng-model="newUser.password" required>
+
+				</div>
+
+				<!-- Acciones que podemos realizar en el formulario -->
+				<button type="submit" class="btn btn-success btn-lg" ng-click="registrarUser()" ng-show="myForm.$valid && action=='create'">Registrar</button>
+				<button type="submit" class="btn btn-success btn-lg" ng-click="updateUser(newUser)" ng-show="myForm.$valid && action=='update'">RegistraVVVVVVV</button>
+				<button type="submit" class="btn btn-danger btn-lg" ng-click="removeUser(newUser)" ng-show="action=='update'">Borrar</button>
+
+
+			</form>
+		</div>
+	</div>
+</div>
