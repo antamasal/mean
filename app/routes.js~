@@ -9,9 +9,9 @@ module.exports = function(app) {
 	// devolver todos los Users
 	app.get('/api/users', ControllerUser.getUsers);
 	// establece usuario en sesion
-	app.post('/api/users/establecer', ControllerUser.establecerUsuario);
+	app.post('/api/users/establecer/', ControllerUser.establecerUsuario);
 	// desestablece usuario en sesion
-	app.post('/api/users/desestablecer', ControllerUser.desestablecerUsuario);
+	app.post('/api/users/desestablecer/:username/:password', ControllerUser.desestablecerUsuario);
 	// Crear un nueva User
 	app.post('/api/user', ControllerUser.saveUser);
 	// Modificar los datos de un Usuario

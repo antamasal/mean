@@ -1,0 +1,23 @@
+<h2>Registro de usuario</h2>
+<div class="row" ng-controller="registerController">
+      <div class="col-sm-4 col-sm-offset-1 text-center">
+			<form name="myForm" enctype="multipart/form-data">
+				<div class="form-group">
+					<input type="text" class="form-control input-lg text-center" placeholder="Nombre" ng-model="newUser.name" required>
+					<br>
+					<input type="number" class="form-control input-lg text-center" placeholder="Edad" ng-model="newUser.age" required>
+					<br>
+					<input type="text" class="form-control input-lg text-center" placeholder="Biografía" ng-model="newUser.bio" required>
+					<br>
+					<input type="text" class="form-control input-lg text-center" placeholder="Email" ng-model="newUser.email" required>
+					<br>
+					<input type="text" class="form-control input-lg text-center" placeholder="Password" ng-model="newUser.password" required>
+
+				</div>
+
+				<!-- Acciones que podemos realizar en el formulario -->
+				<button type="submit" class="btn btn-success btn-lg" ng-click="registrarUser()">Registrar</button>
+			</form>
+		</div>
+	</div>
+</div>
