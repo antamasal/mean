@@ -68,10 +68,13 @@ exports.removeUser = function(req, res) {
 
 // establece usuario en sesion
 exports.establecerUsuario = function(req, res) {
-
-	console.log(req.body.username);
+	var user = [];
+	User.findOne({username: req.body.username}, function(err,obj) {
+		user = obj;
+		console.log(obj);
+		console.log(err);
+	});
 	req.session.user = req.body.username;
-	console.log(req.session.user);
 	res.send("ok");
 }
 

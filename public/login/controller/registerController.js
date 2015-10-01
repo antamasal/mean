@@ -6,12 +6,11 @@ app.controller('registerController', function($scope,auth, $location)
     $scope.registrarUser = function()
     {
         var status = auth.register($scope.newUser);
-        if (status == "ok") {
-             $location.path("/login");
+        if (status) {
+        	$scope.newUser = {};
+            $location.path("/login");
         }
     }
 
 
 });
-
-
