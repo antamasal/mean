@@ -3,10 +3,13 @@ var mongoose = require('mongoose'),
 
 
 var Task = new Schema({
-    name  :  { type: String, index: true  }
-  , description  :  { type: String, index: true  }
+    name  :  { type: String}
+  , description  :  { type: String}
   , date  :  { type: Date }
-  , idUser  :  { type: String, index: true  }
+  , creador: {
+    type: Schema.ObjectId,
+    ref: 'User'
+  }
 });
 
 

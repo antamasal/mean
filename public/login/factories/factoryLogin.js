@@ -8,18 +8,18 @@ app.factory("auth", function($cookies,$cookieStore,$location, $http/*, $q*/)
     return{
         login : function(username, password)
         {
-            //creamos la cookie con el nombre que nos han pasado
-            $cookies.username = username,
-            $cookies.password = password;
+            var ok = false;
+                //creamos la cookie con el nombre que nos han pasado
+            $http.post('/api/users/establecer', { 'username' : username, "password" : password}).success(function(data,status){
+                if (data.username == username) {
+                    $cookies.username = username,
+                    $cookies.password = password;
+                    $location.path("/home");
 
-
-		$http.post('/api/users/establecer', { 'username' : username, "password" : password}).success(function(data,status){
-		console.log(data);
-		});
-
-
-            //mandamos a la home
-            $location.path("/home");
+                } else {
+                  $location.path("/login");
+                }
+		  });
         },
         register : function(newUser)
         {
@@ -46,10 +46,18 @@ app.factory("auth", function($cookies,$cookieStore,$location, $http/*, $q*/)
         logout : function()
         {
             //al hacer logout eliminamos la cookie con $cookieStore.remove
-            $cookieStore.remove("username"),
-            $cookieStore.remove("password");
-            //mandamos al login
-            $location.path("/login");
+             var ok = false;
+                //creamos la cookie con el nombre que nos han pasado
+            $http.post('/api/users/desestablecer', { 'username' : $cookies.username, "password" : $cookies.password}).success(function(data,status){
+                if (data.username == $cookies.username) {
+                    $cookieStore.remove("username"),
+                    $cookieStore.remove("password");
+                    $location.path("/login");
+
+                } else {
+                  $location.path("/home");
+                }
+          });
         },
         checkStatus : function()
         {

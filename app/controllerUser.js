@@ -15,22 +15,18 @@ exports.getUsers = function (req, res){
 // Guarda un objeto Usuario en base de datos
 exports.saveUser = function(req, res) {
 
-		// Creo el objeto Persona
-		console.log(req.body);
+		console.log("Peticion guardar usuario con el usuario en req " + req.body);
 		User.create(
 
-			{name : req.body.name,	age: req.body.age, bio: req.body.bio, email: req.body.email, password: req.body.password}, 
+			{name : req.body.name, lastname: req.body.lastname,	age: req.body.age, bio: req.body.bio, email: req.body.email, username: req.body.username, password: req.body.password}, 
 			function(err, persona) {
-				if (err)
+				if (err) {
 					res.send(err);
-
-				// Obtine y devuelve todas las personas tras crear una de ellas
-				User.find(function(err, users) {
-				 	if (err)
-				 		res.send(err)
-				 	res.json(users);
-				});
-			});
+				} else {
+					res.json(persona);
+				}	
+			}
+		);
 
 	}
 
@@ -41,7 +37,6 @@ exports.updateUser = function(req, res){
 					function(err, user) {
 						if (err)
 							res.send(err);
-
 				// Obtine y devuelve todas las personas tras crear una de ellas
 				User.find(function(err, users) {
 				 	if (err)
@@ -68,25 +63,33 @@ exports.removeUser = function(req, res) {
 
 // establece usuario en sesion
 exports.establecerUsuario = function(req, res) {
-	var user = [];
+	console.log("Procedemos a establecer usuario");
+    var user = {};
 	User.findOne({username: req.body.username}, function(err,obj) {
 		user = obj;
-		console.log(obj);
-		console.log(err);
+		console.log("encontrado el usuario con username " + req.body.username + " => " + user);
+        console.log(user);
+        if (user.username == req.body.username) {
+			req.session.user = user;
+        }
+        console.log("usuario en sesion " + req.session.user);
+        res.send(user);
 	});
-	req.session.user = req.body.username;
-	res.send("ok");
 }
 
 
 
 // desestablece usuario en sesion
 exports.desestablecerUsuario = function(req, res) {
-	var username = req.params.username;
-	var password = req.params.password;
-	console.log(username);
-	console.log(password);
-	req.session.user = "";
-	res.send("ok");
+	console.log("Procedemos a deestablecer usuario");
+    var user = {};
+	User.findOne({username: req.body.username}, function(err,obj) {
+		user = obj;
+		console.log("encontrado el usuario con username " + req.body.username + " => " + user);
+        if (user.username == req.body.username) {
+			req.session.user = null;
+        }
+        res.send(user);
+	});
 }
 
