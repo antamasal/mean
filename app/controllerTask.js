@@ -3,7 +3,7 @@ var Task = require('./modelo/task');
 
 // Obtiene todos los objetos Tasks de la base de datos
 exports.getTasks = function (req, res){
-	Task.find(
+	Task.find({ 'creador': req.session.user._id},
 		function(err, tasks) {
 			if (err)
 				res.send(err)
@@ -12,12 +12,14 @@ exports.getTasks = function (req, res){
 			);
 }
 
+
 // Guarda un objeto Usuario en base de datos
 exports.saveTask = function(req, res) {
 		// Creo el objeto Persona
+		console.log("usuarion en siion" + req.session.user);
 		console.log(req.body);
 		Task.create(
-			{name : req.body.name,	description: req.body.description, idUser: req.body.idUser._id, date: req.body.date}, 
+			{name : req.body.name,	description: req.body.description, creador: req.session.user._id, date: req.body.date}, 
 			function(err, task) {
 				if (err)
 					res.send(err);

@@ -1,0 +1,23 @@
+<h2>Registro de tareas</h2>
+<div class="row" ng-controller="taskController">
+
+<ul class="list-group" ng-repeat="task in tasks| orderBy:'name'">
+  <li class="list-group-item">{{task.name}}</li>
+</ul>
+
+      <div class="col-sm-4 col-sm-offset-1 text-center">
+			<form name="myForm" enctype="multipart/form-data">
+				<div class="form-group">
+					<input type="text" class="form-control input-lg text-center" placeholder="Nombre" ng-model="newTask.name" required>
+					<br>
+					<input type="text" class="form-control input-lg text-center" placeholder="Description" ng-model="newTask.description" required>
+					<br>
+					<input type="date" class="form-control input-lg text-center" placeholder="Fecha" ng-model="newTask.date" required>
+				</div>
+
+				<!-- Acciones que podemos realizar en el formulario -->
+				<button type="submit" class="btn btn-success btn-lg" ng-click="createTask()">Registrar</button>
+			</form>
+		</div>
+	</div>
+</div>

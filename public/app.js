@@ -1,5 +1,5 @@
 //creamos el modulo e inyectamos bootstrap ui
-var app = angular.module('cookies', ['ngCookies', 'factoryLogin', 'loginController', 'homeController', 'registerController']);
+var app = angular.module('cookies', ['ngCookies', 'factoryLogin', 'loginController', 'homeController', 'registerController', 'taskFactory', 'taskController']);
 
 //damos configuración de ruteo a nuestro sistema de login
 app.config(function($routeProvider)
@@ -19,6 +19,10 @@ app.config(function($routeProvider)
     .when("/registrarse", {
         controller : "registerController",
         templateUrl : "login/templates/singin.html"
+    })
+    .when("/crearTask", {
+        controller : "taskController",
+        templateUrl : "task/templates/task.html" 
     })
 });
 

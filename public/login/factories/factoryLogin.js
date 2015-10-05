@@ -12,8 +12,7 @@ app.factory("auth", function($cookies,$cookieStore,$location, $http/*, $q*/)
                 //creamos la cookie con el nombre que nos han pasado
             $http.post('/api/users/establecer', { 'username' : username, "password" : password}).success(function(data,status){
                 if (data.username == username) {
-                    $cookies.username = username,
-                    $cookies.password = password;
+                    $cookies.user = JSON.stringify(data);
                     $location.path("/home");
 
                 } else {
@@ -50,8 +49,7 @@ app.factory("auth", function($cookies,$cookieStore,$location, $http/*, $q*/)
                 //creamos la cookie con el nombre que nos han pasado
             $http.post('/api/users/desestablecer', { 'username' : $cookies.username, "password" : $cookies.password}).success(function(data,status){
                 if (data.username == $cookies.username) {
-                    $cookieStore.remove("username"),
-                    $cookieStore.remove("password");
+                    $cookieStore.remove("user");
                     $location.path("/login");
 
                 } else {
@@ -62,15 +60,15 @@ app.factory("auth", function($cookies,$cookieStore,$location, $http/*, $q*/)
         checkStatus : function()
         {
             //creamos un array con las rutas que queremos controlar
-            var rutasPrivadas = ["/home","/dashboard","/login"];
-            if(this.in_array($location.path(),rutasPrivadas) && typeof($cookies.username) == "undefined")
+            var rutasPrivadas = ["/home","/dashboard","/login", "/crearTask"];
+            if(this.in_array($location.path(),rutasPrivadas) && typeof($cookies.user) == "undefined")
             {
                 $location.path("/login");
             }
             //en el caso de que intente acceder al login y ya haya iniciado sesión lo mandamos a la home
-            if(this.in_array("/login",rutasPrivadas) && typeof($cookies.username) != "undefined")
+            if(this.in_array("/login",rutasPrivadas) && typeof($cookies.user) != "undefined")
             {
-                $location.path("/home");
+                //$location.path("/home");
             }
         },
         in_array : function(needle, haystack)
