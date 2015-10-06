@@ -1,5 +1,5 @@
 var User = require('./modelo/user');
-
+var md5 = require('md5');
 
 // Obtiene todos los objetos Usuarios de la base de datos
 exports.getUsers = function (req, res){
@@ -18,7 +18,7 @@ exports.saveUser = function(req, res) {
 		console.log("Peticion guardar usuario con el usuario en req " + req.body);
 		User.create(
 
-			{name : req.body.name, lastname: req.body.lastname,	age: req.body.age, bio: req.body.bio, email: req.body.email, username: req.body.username, password: req.body.password}, 
+			{name : req.body.name, lastname: req.body.lastname,	age: req.body.age, bio: req.body.bio, email: req.body.email, username: req.body.username, password: md5(req.body.password)}, 
 			function(err, persona) {
 				if (err) {
 					res.send(err);
