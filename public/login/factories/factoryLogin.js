@@ -3,7 +3,7 @@ var app = angular.module('factoryLogin', ['ngCookies']);
 //$cookies para crear cookies
 //$cookieStore para actualizar o eliminar
 //$location para cargar otras rutas
-app.factory("auth", function($cookies,$cookieStore,$location, $http/*, $q*/)
+app.factory("auth", function($cookies,$cookieStore,$location, $http, $q)
 {
     return{
         login : function(username, password)
@@ -22,25 +22,20 @@ app.factory("auth", function($cookies,$cookieStore,$location, $http/*, $q*/)
         },
         register : function(newUser)
         {
-            //var res = $q.defer();
-            /*$http.post('/api/user', $scope.newUser)
-                .success(function(data) {
-                    console.log(data);
-                    $location.path("/registrarse");
+            
+         var defered = $q.defer();
+        var promise = defered.promise;
 
-                    })
-                .error(function(data) {
-                    console.log('Error: ' + data);
-                    $location.path("/login");
+            $http.post('/api/user', newUser)
+            .success(function(data) {
+                defered.resolve(data);
+            })
+            .error(function(err) {
+                defered.reject(err)
             });
-            $location.path("/login");*/
-            var res = false;
-            $http.post('/api/user', newUser).success(function(data,status){
-                if (status == "200") {
-                    res = true;
-                }
-            });
-            return res;
+
+            return promise;    
+        
         },
         logout : function()
         {

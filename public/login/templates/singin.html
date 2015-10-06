@@ -11,7 +11,12 @@
 					<br>
 					<input type="text" class="form-control input-lg text-center" placeholder="Biografía" ng-model="newUser.bio" required>
 					<br>
+                                    <fieldset class="form-group">
+
 					<input type="text" class="form-control input-lg text-center" placeholder="Email" ng-model="newUser.email" required>
+                    <span ng-show="userForm.email.$dirty && userForm.email.$error.required" class="text-danger pull-right">The email is required</span>
+                <span ng-show="userForm.email.$dirty && userForm.email.$error.email" class="text-danger pull-right">The email is invalid</span>
+                    </fieldset>
 					<br>
 					<input type="text" class="form-control input-lg text-center" placeholder="Usuario" ng-model="newUser.username" required>
 					<br>
